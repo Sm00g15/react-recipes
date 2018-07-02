@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv').config({path: 'variables.env'})
 const Recipe = require('./models/Recipe'); // mongoose schema
 const User = require('./models/User'); // mongoose schema
@@ -23,6 +24,11 @@ mongoose
     .then(() => console.log('Database connected'))
     .catch(err => console.error(err));
 const app = express();
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+app.use(cors(corsOptions));
 
 // Create graphiql application
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
@@ -35,6 +41,8 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({
         User
     }
 }))
-app.listen(3000, () => {
-    console.log('Server listening on PORT 3000')
+const PORT = process.env.PORT || 4444;
+
+app.listen(PORT, () => {
+    console.log(`Server listening on ${PORT}`)
 });
