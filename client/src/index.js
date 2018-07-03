@@ -2,12 +2,16 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import "./index.css";
+
 import App from "./components/App";
 import Signup from "./components/Auth/Signup";
 import Signin from "./components/Auth/Signin";
 import withSession from "./components/withSession";
 import Search from "./components/Recipe/Search";
 import Navbar from "./components/Navbar";
+import Profile from "./components/Profile/Profile";
+import AddRecipe from "./components/Recipe/AddRecipe";
+
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
@@ -38,6 +42,8 @@ const Root = ({ refetch }) => (
       <Switch>
         <Route path="/" exact component={App}/>
         <Route path="/search" component={Search}/>
+        <Route path="/recipe/add" component={AddRecipe}/>
+        <Route path="/profile" component={Profile}/>
         <Route path="/signin" render={() =><Signin refetch={refetch}/>} />
         <Route path="/signup" render={() =><Signup refetch={refetch}/>}/>
         <Redirect to="/" />
