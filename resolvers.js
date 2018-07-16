@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const createToken = (user, secret, expiresIn) => {
   const { username, email } = user;
   return jwt.sign({ username, email }, secret, { expiresIn });
-};
+}; 
 
 exports.resolvers = {
   Query: {
